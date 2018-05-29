@@ -1,8 +1,5 @@
-from pytest import fixture
-from time import sleep
 from selenium import webdriver
 
-# @fixture('session')
 class TestClass:
     def setup_method(self):
         self.browser = webdriver.Firefox()
