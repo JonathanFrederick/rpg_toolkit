@@ -8,5 +8,5 @@ class TestClass:
     def teardown_method(self):
         self.browser.close()
 
-    def test_django_title(self):
-        assert 'Django' in self.browser.title
+    def test_character_creation_title(self):
+        assert 'Character Creation' in self.browser.title
