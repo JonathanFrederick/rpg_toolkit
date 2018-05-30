@@ -18,8 +18,8 @@ class TestAbilityScoreFunctionality:
         input_ability_boxes = self.browser.find_elements_by_class_name('ability-box')
         top_box = input_ability_boxes[0]
         assert len(input_ability_boxes) is 6, 'Not enough ability score inputs'
-        assert top_box.tag_name is 'input'
-        assert top_box.get_attribute('value') is 10
+        assert top_box.tag_name == 'input'
+        assert top_box.get_attribute('value') == 10
 
         # check that for arrows that increase and decrease values
 
