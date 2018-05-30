@@ -14,7 +14,12 @@ class TestAbilityScoreFunctionality:
         header_text = self.browser.find_element_by_tag_name('h1').text
         assert 'Character Creation' in header_text
 
-        # check for input boxes with 10 for the initial value
+        # check for 6 input boxes with 10 for the initial value
+        input_ability_boxes = self.browser.find_elements_by_class_name('ability-box')
+        top_box = input_ability_boxes[0]
+        assert len(input_ability_boxes) is 6, 'Not enough ability score inputs'
+        assert top_box.tag_name is 'input'
+        assert top_box.get_attribute('value') is 10
 
         # check that for arrows that increase and decrease values
 
