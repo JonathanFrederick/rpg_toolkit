@@ -21,6 +21,17 @@ class TestAbilityScoreFunctionality:
         assert top_box.tag_name == 'input'
         assert top_box.get_attribute('value') == '10'
 
+        # check that the user give values below 7 or above 18
+        def send_ability(val):
+            top_box.clear()
+            top_box.send_keys(val)
+            return top_box.get_attribute('value')
+        assert send_ability('12') == '12'
+        assert send_ability('8') == '8'
+        assert send_ability('6') == '7'
+        assert send_ability('19') == '18'
+        assert send_ability('10') == '10'
+
         # check that total points spent is accurately calculated
         total_points = self.browser.find_element_by_class_name('total-points')
         assert total_points.get_attribute('innerHTML') == '0'
