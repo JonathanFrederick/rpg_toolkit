@@ -21,4 +21,5 @@ from characters import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path(r'', views.home_page, name='home'),
+    path(r'tests', views.test_js, name='testJS')
 ]
