@@ -3,35 +3,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% load static %}
   <script src="{% static "characters/scripts.js" %}"></script>
+  <style>
+  span.warn { visibility: hidden }
+  </style>
   <title>Character Creation</title>
 </head>
 <body>
   <h1>Character Creation</h1>
   <form><ul>
+    {% for abl in abilities %}
     <li class="ability">
       <span class="warn char-warn">C</span>
       <span class="warn range-warn">R</span>
+      <div class="ablity-name">{{ abl }}</span>
       <input class='ability-box' value=10></input></li>
-    <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <input class='ability-box' value=10></input></li>
-    <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <input class='ability-box' value=10></input></li>
-    <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <input class='ability-box' value=10></input></li>
-    <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <input class='ability-box' value=10></input></li>
-    <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <input class='ability-box' value=10></input></li>
+    {% endfor %}
   </ul></form>
   <p>Points Spent: <span class="total-points">0</span></p>
 </body>
