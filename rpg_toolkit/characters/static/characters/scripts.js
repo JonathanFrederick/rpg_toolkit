@@ -5,18 +5,24 @@ $(document).ready(function(){
     });
 });
 
+function warningVisibility(elem, warning, vis) {
+  elem.parentElement.getElementsByClassName(warning)[0].style.visibility=vis
+
+}
+
 function scoreValidation(score){
   var non_digs = new RegExp("[^0-9]", "g")
   var new_score = score.value.replace(non_digs, "")
   if (new_score != score.value) {
-    alert("digits only, please")
-    score.value = new_score
+    warningVisibility(score, "char-warn", "visible")
+  } else {
+    warningVisibility(score, "char-warn", "hidden")
   }
   var num_score = Number(new_score)
   if (num_score > 18) {
-    alert("numbers 7-18 only, please")
+    // alert("numbers 7-18 only, please")
   } else if (num_score < 7) {
-    alert("numbers 7-18 only, please")
+    // alert("numbers 7-18 only, please")
   }
   return num_score
 }
