@@ -1,4 +1,5 @@
 from selenium import webdriver
+from time import sleep
 
 class TestAbilityScoreFunctionality:
     def setup_method(self):
@@ -15,22 +16,36 @@ class TestAbilityScoreFunctionality:
         assert 'Character Creation' in header_text
 
         # check for 6 input boxes with 10 for the initial value
-        input_ability_boxes = self.browser.find_elements_by_class_name('ability-box')
-        top_box = input_ability_boxes[0]
-        assert len(input_ability_boxes) is 6, 'Not enough ability score inputs'
+        ability_list_items = self.browser.find_elements_by_class_name('ability')
+        top_item = ability_list_items[0]
+        top_box = top_item.find_element_by_class_name('ability-box')
+        char_warn = top_item.find_element_by_class_name('char-warn')
+        range_warn = top_item.find_element_by_class_name('range-warn')
+        assert len(ability_list_items) is 6, 'Not enough ability score inputs'
         assert top_box.tag_name == 'input'
         assert top_box.get_attribute('value') == '10'
 
-        # check that the user give values below 7 or above 18
+        # check for warnings for different inputs
         def send_ability(val):
             top_box.clear()
             top_box.send_keys(val)
             return top_box.get_attribute('value')
-        assert send_ability('12') == '12'
-        assert send_ability('8') == '8'
-        assert send_ability('6') == '7'
-        assert send_ability('19') == '18'
-        assert send_ability('10') == '10'
+        send_ability('12')
+        assert not char_warn.is_displayed()
+        assert not range_warn.is_displayed()
+        send_ability('8a')
+        assert char_warn.is_displayed()
+        assert not range_warn.is_displayed()
+        send_ability('6')
+        assert not char_warn.is_displayed()
+        assert range_warn.is_displayed()
+        send_ability('19')
+        assert not char_warn.is_displayed()
+        assert range_warn.is_displayed()
+        send_ability('yz')
+        assert char_warn.is_displayed()
+        assert range_warn.is_displayed()
+
 
         # check that total points spent is accurately calculated
         total_points = self.browser.find_element_by_class_name('total-points')
