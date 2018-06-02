@@ -13,9 +13,9 @@
   <form><ul>
     {% for abl in abilities %}
     <li class="ability">
-      <span class="warn char-warn">C</span>
-      <span class="warn range-warn">R</span>
-      <div class="ablity-name">{{ abl }}</span>
+      <span class="warn char-warn" title="only digits, please">&#9888;</span>
+      <span class="warn range-warn" title="only numbers 7-18, please">&#9888;</span>
+      <span class="ablity-name">{{ abl }}</span>
       <input class='ability-box' value=10></input></li>
     {% endfor %}
   </ul></form>
