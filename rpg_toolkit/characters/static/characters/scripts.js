@@ -19,10 +19,10 @@ function scoreValidation(score){
     warningVisibility(score, "char-warn", "hidden")
   }
   var num_score = Number(new_score)
-  if (num_score > 18) {
-    // alert("numbers 7-18 only, please")
-  } else if (num_score < 7) {
-    // alert("numbers 7-18 only, please")
+  if (num_score > 18 || num_score < 7) {
+    warningVisibility(score, "range-warn", "visible")
+  } else {
+    warningVisibility(score, "range-warn", "hidden")
   }
   return num_score
 }
