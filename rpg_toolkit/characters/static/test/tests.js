@@ -5,15 +5,17 @@ QUnit.test( "hello test", function( assert ) {
 });
 
 QUnit.test( "score validation test", function( assert ) {
-  item = document.createElement("li")
+  item = document.createElement("tr")
+  td = document.createElement("td")
   inp = document.createElement("input")
   inp.className = "ability-box"
   inp.value = "10"
-  item.appendChild(inp)
-  char_warn = document.createElement("span")
+  td.appendChild(inp)
+  item.appendChild(td)
+  char_warn = document.createElement("td")
   char_warn.className = "warn char-warn"
   char_warn.style.visibility = "hidden"
-  range_warn = document.createElement("span")
+  range_warn = document.createElement("td")
   range_warn.className = "warn range-warn"
   range_warn.style.visibility = "hidden"
   item.appendChild(char_warn)

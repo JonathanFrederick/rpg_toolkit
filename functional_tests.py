@@ -47,6 +47,8 @@ class TestAbilityScoreFunctionality:
         assert range_warn.is_displayed()
 
 
+
+
         # check that total points spent is accurately calculated
         total_points = self.browser.find_element_by_class_name('total-points')
         assert total_points.get_attribute('innerHTML') == '0'
