@@ -1,12 +1,11 @@
 $(document).ready(function(){
     $(".ability-box").keyup(function(){
-        // $("span").text(i += 1);
         pointsTotal()
     });
 });
 
 function warningVisibility(elem, warning, vis) {
-  elem.parentElement.getElementsByClassName(warning)[0].style.visibility=vis
+  elem.parentElement.parentElement.getElementsByClassName(warning)[0].style.visibility=vis
 
 }
 

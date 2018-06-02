@@ -4,21 +4,22 @@
   {% load static %}
   <script src="{% static "characters/scripts.js" %}"></script>
   <style>
-  span.warn { visibility: hidden }
+  td.warn { visibility: hidden }
   </style>
   <title>Character Creation</title>
 </head>
 <body>
   <h1>Character Creation</h1>
-  <form><ul>
+  <form><table>
     {% for abl in abilities %}
-    <li class="ability">
-      <span class="warn char-warn" title="only digits, please">&#9888;</span>
-      <span class="warn range-warn" title="only numbers 7-18, please">&#9888;</span>
-      <span class="ablity-name">{{ abl }}</span>
-      <input class='ability-box' value=10></input></li>
+    <tr class="ability">
+      <td class="warn char-warn" title="only digits, please">&#9888;</td>
+      <td class="warn range-warn" title="only numbers 7-18, please">&#9888;</td>
+      <td class="ablity-name">{{ abl }}</td>
+      <td><input class='ability-box' value=10></input></td>
+    </tr>
     {% endfor %}
-  </ul></form>
+  </table></form>
   <p>Points Spent: <span class="total-points">0</span></p>
 </body>
 </html>
