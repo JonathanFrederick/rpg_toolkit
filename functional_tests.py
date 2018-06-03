@@ -46,12 +46,17 @@ class TestAbilityScoreFunctionality:
         assert char_warn.is_displayed()
         assert range_warn.is_displayed()
 
-
-
-
         # check that total points spent is accurately calculated
+        send_ability('10')
         total_points = self.browser.find_element_by_class_name('total-points')
         assert total_points.get_attribute('innerHTML') == '0'
+        send_ability('12')
+        assert total_points.get_attribute('innerHTML') == '2'
+        send_ability('7')
+        assert total_points.get_attribute('innerHTML') == '-4'
+        send_ability('no')
+        assert total_points.get_attribute('innerHTML') == '&#9888;'
+
 
         # check for input boxes for racial bonus with 0 for the initial value
 
