@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 from time import sleep
 
 class TestAbilityScoreFunctionality:
@@ -57,8 +58,39 @@ class TestAbilityScoreFunctionality:
         send_ability('no')
         assert total_points.get_attribute('innerHTML') == '⚠'
 
+        # check for elements for racial bonus with 0 for the initial value
+        racial_mods = self.browser.find_elements_by_class_name('racial-mod')
+        assert len(racial_mods) == 6, 'Not enough racial mod elements'
 
-        # check for input boxes for racial bonus with 0 for the initial value
+        # check that a selected race accurately assigns race modifiers
+        def fetch_race_mod(ability):
+            return self.browser.find_element_by_id(ability) \
+            .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
+        select_race = Select(driver.find_element_by_id('races'))
+        select_race.select_by_visible_text('Halfling')
+        assert fetch_race_mod('STR') == '-2'
+        assert fetch_race_mod('DEX') == '+2'
+        assert fetch_race_mod('CON') == '0'
+
+        select_race.select_by_visible_text('Elf')
+        assert fetch_race_mod('STR') == '0'
+        assert fetch_race_mod('CON') == '-2'
+        assert fetch_race_mod('INT') == '+2'
+
+        select_race.select_by_visible_text('Human')
+        racial_mods[0].find_element_by_tag_name('input').click()
+        assert racial_mods[0].find_element_by_tag_name('input').is_selected(), \
+            'clicked radio button is not selected'
+        assert '+2' in fetch_race_mod('STR'), 'selected doesn\'t show bonus'
+
+        for mod in ('STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'):
+            human_mod = fetch_race_mod(mod)
+            assert '<input' in human_mod, mod+' lacks an input option'
+            assert 'radio' in human_mod, mod+' lacks a radio button'
+            assert 'name=pick-bonus', mod+' lacks a name for the radio button'
+
+
+
 
         # check that racial bonuses are accurately applied to ability totals
 
