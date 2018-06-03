@@ -47,3 +47,11 @@ class RaceModelTest(TestCase):
         saved_races = Race.objects.all()
         self.assertEqual(saved_races[0].race, "Dwarf")
         self.assertEqual(saved_races[1].race, "Elf")
+
+    def test_assigning_ability_bonuses(self):
+        gnome = Race()
+        gnome.race = 'gnome'
+        gnome.ability_bonus = '+2 Constitution, +2 Charisma, –2 Strength'
+        gnome.save()
+        self.assertEqual(Race.objects.all()[0].ability_bonus,
+            '+2 Constitution, +2 Charisma, –2 Strength')
