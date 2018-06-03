@@ -1,26 +1,26 @@
 //QUnit's suggested smoke test
+item = document.createElement("tr")
+td = document.createElement("td")
+inp = document.createElement("input")
+inp.className = "ability-box"
+inp.value = "10"
+td.appendChild(inp)
+item.appendChild(td)
+char_warn = document.createElement("td")
+char_warn.className = "warn char-warn"
+char_warn.style.visibility = "hidden"
+range_warn = document.createElement("td")
+range_warn.className = "warn range-warn"
+range_warn.style.visibility = "hidden"
+item.appendChild(char_warn)
+item.appendChild(range_warn)
+
 
 QUnit.test( "hello test", function( assert ) {
   assert.ok( 1 == "1", "Passed!" );
 });
 
 QUnit.test( "score validation test", function( assert ) {
-  item = document.createElement("tr")
-  td = document.createElement("td")
-  inp = document.createElement("input")
-  inp.className = "ability-box"
-  inp.value = "10"
-  td.appendChild(inp)
-  item.appendChild(td)
-  char_warn = document.createElement("td")
-  char_warn.className = "warn char-warn"
-  char_warn.style.visibility = "hidden"
-  range_warn = document.createElement("td")
-  range_warn.className = "warn range-warn"
-  range_warn.style.visibility = "hidden"
-  item.appendChild(char_warn)
-  item.appendChild(range_warn)
-
   assert.ok(10 == scoreValidation(inp), "value 10 returns number 10")
   assert.ok(char_warn.style.visibility == "hidden", "10 hides char-warn")
   assert.ok(range_warn.style.visibility == "hidden", "10 hides range-warn")
