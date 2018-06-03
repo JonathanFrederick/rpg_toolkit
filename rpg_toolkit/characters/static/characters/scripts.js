@@ -39,5 +39,11 @@ function pointsTotal(){
   for (i = 0; i < scores.length; i++) {
     total += pointsFor[scoreValidation(scores[i])]
   }
-  $(".total-points").text(total);
+  if ($(".warn").filter(function(){
+    return this.style.visibility == "visible"
+  }).length > 0) {
+    $(".total-points").text('\u26A0')
+  } else {
+    $(".total-points").text(total);
+  }
 }
