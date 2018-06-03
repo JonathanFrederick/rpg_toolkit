@@ -14,7 +14,9 @@ range_warn.className = "warn range-warn"
 range_warn.style.visibility = "hidden"
 item.appendChild(char_warn)
 item.appendChild(range_warn)
-
+inps = [inp, inp.cloneNode(true),inp.cloneNode(true)];
+total_points = document.createElement("span")
+total_points.className = "total-points"
 
 QUnit.test( "hello test", function( assert ) {
   assert.ok( 1 == "1", "Passed!" );
@@ -45,4 +47,17 @@ QUnit.test( "score validation test", function( assert ) {
   assert.ok(char_warn.style.visibility == "visible", "10c shows char-warn")
   assert.ok(range_warn.style.visibility == "hidden", "10c hides range-warn")
 
+})
+
+
+QUnit.test( "total points tests", function( assert ) {
+  inps[0].value = '12'
+  $(".ability-box:first").keyup()
+  assert.ok(total_points.innerHTML == '2')
+  inps[1].value = '-7'
+  $(".ability-box:first").keyup()
+  assert.ok(total_points.innerHTML == '-2')
+  inps[2].value = '18'
+  $(".ability-box:first").keyup()
+  assert.ok(total_points.innerHTML == "15")
 })
