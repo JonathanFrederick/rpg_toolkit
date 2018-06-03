@@ -35,3 +35,15 @@ class TestPageTest(TestCase):
         response = test_js(request)
         expected_html = render_to_string('tests.html')
         self.assertEqual(response.content.decode(), expected_html)
+
+from characters.models import Race
+
+class RaceModelTest(TestCase):
+    def test_saving_and_retrieving_races(self):
+        race1, race2 = Race(), Race()
+        race1.race, race2.race = "Dwarf", "Elf"
+        race1.save()
+        race2.save()
+        saved_races = Race.objects.all()
+        self.assertEqual(saved_races[0].race, "Dwarf")
+        self.assertEqual(saved_races[1].race, "Elf")
