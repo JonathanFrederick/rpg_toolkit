@@ -55,7 +55,7 @@ class TestAbilityScoreFunctionality:
         send_ability('7')
         assert total_points.get_attribute('innerHTML') == '-4'
         send_ability('no')
-        assert total_points.get_attribute('innerHTML') == '&#9888;'
+        assert total_points.get_attribute('innerHTML') == '⚠'
 
 
         # check for input boxes for racial bonus with 0 for the initial value
