@@ -23,7 +23,8 @@ QUnit.test( "hello test", function( assert ) {
 });
 
 QUnit.test( "score validation test", function( assert ) {
-  assert.ok(10 == scoreValidation(inp), "value 10 returns number 10")
+  inp.value = '10'
+  assert.equal(10, scoreValidation(inp), "value 10 returns number 10")
   assert.ok(char_warn.style.visibility == "hidden", "10 hides char-warn")
   assert.ok(range_warn.style.visibility == "hidden", "10 hides range-warn")
 
@@ -53,11 +54,11 @@ QUnit.test( "score validation test", function( assert ) {
 QUnit.test( "total points tests", function( assert ) {
   inps[0].value = '12'
   $(".ability-box:first").keyup()
-  assert.ok(total_points.innerHTML == '2')
+  assert.equal(total_points.innerHTML, '2')
   inps[1].value = '-7'
   $(".ability-box:first").keyup()
-  assert.ok(total_points.innerHTML == '-2')
+  assert.equal(total_points.innerHTML,'-2')
   inps[2].value = '18'
   $(".ability-box:first").keyup()
-  assert.ok(total_points.innerHTML == "15")
+  assert.equal(total_points.innerHTML, "15")
 })
