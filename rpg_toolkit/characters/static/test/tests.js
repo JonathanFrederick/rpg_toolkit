@@ -42,10 +42,17 @@ QUnit.test( "total points tests", function( assert ) {
   inps[0].value = '12'
   $(".ability-box").keyup()
   assert.equal(total_points.innerHTML, '2')
+  inps[1].value = '-7'
+  $(".ability-box").keyup()
+  assert.equal(total_points.innerHTML,'\u26A0')
   inps[1].value = '7'
   $(".ability-box").keyup()
   assert.equal(total_points.innerHTML,'-2')
+  inps[2].value = 'ac'
+  $(".ability-box").keyup()
+  assert.equal(total_points.innerHTML, "\u26A0")
   inps[2].value = '18'
   $(".ability-box").keyup()
   assert.equal(total_points.innerHTML, "15")
+
 })
