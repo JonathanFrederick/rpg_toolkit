@@ -66,7 +66,7 @@ class TestAbilityScoreFunctionality:
         def fetch_race_mod(ability):
             return self.browser.find_element_by_id(ability) \
             .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
-        select_race = Select(driver.find_element_by_id('races'))
+        select_race = Select(self.browser.find_element_by_id('races'))
         select_race.select_by_visible_text('Halfling')
         assert fetch_race_mod('STR') == '-2'
         assert fetch_race_mod('DEX') == '+2'
