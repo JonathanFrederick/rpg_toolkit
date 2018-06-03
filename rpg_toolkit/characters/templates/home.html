@@ -10,16 +10,21 @@
 </head>
 <body>
   <h1>Character Creation</h1>
-  <form><table>
+  <form>
+    <select id="races">
+    </select>
+    <table>
     {% for abl in abilities %}
-    <tr class="ability">
+    <tr class="ability" id="{{ abl }}">
       <td class="warn char-warn" title="only digits, please">&#9888;</td>
       <td class="warn range-warn" title="only numbers 7-18, please">&#9888;</td>
       <td class="ablity-name">{{ abl }}</td>
       <td><input class='ability-box' value=10></input></td>
+      <td class="racial-mod"></td>
     </tr>
     {% endfor %}
-  </table></form>
+    </table>
+  </form>
   <p>Points Spent: <span class="total-points">0</span></p>
 </body>
 </html>
