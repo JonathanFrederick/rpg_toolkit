@@ -1,28 +1,14 @@
 //QUnit's suggested smoke test
-item = document.createElement("tr")
-td = document.createElement("td")
-inp = document.createElement("input")
-inp.className = "ability-box"
-inp.value = "10"
-td.appendChild(inp)
-item.appendChild(td)
-char_warn = document.createElement("td")
-char_warn.className = "warn char-warn"
-char_warn.style.visibility = "hidden"
-range_warn = document.createElement("td")
-range_warn.className = "warn range-warn"
-range_warn.style.visibility = "hidden"
-item.appendChild(char_warn)
-item.appendChild(range_warn)
-inps = [inp, inp.cloneNode(true),inp.cloneNode(true)];
-total_points = document.createElement("span")
-total_points.className = "total-points"
-
 QUnit.test( "hello test", function( assert ) {
   assert.ok( 1 == "1", "Passed!" );
 });
 
 QUnit.test( "score validation test", function( assert ) {
+  var inp = $(".ability-box").get(0)
+  var char_warn = $(".char-warn").get(0)
+  var range_warn = $(".range-warn").get(0)
+
+
   inp.value = '10'
   assert.equal(10, scoreValidation(inp), "value 10 returns number 10")
   assert.ok(char_warn.style.visibility == "hidden", "10 hides char-warn")
@@ -50,15 +36,16 @@ QUnit.test( "score validation test", function( assert ) {
 
 })
 
-
 QUnit.test( "total points tests", function( assert ) {
+  var inps = $(".ability-box").toArray()
+  var total_points = $(".total-points").get(0)
   inps[0].value = '12'
-  $(".ability-box:first").keyup()
+  $(".ability-box").keyup()
   assert.equal(total_points.innerHTML, '2')
   inps[1].value = '-7'
-  $(".ability-box:first").keyup()
+  $(".ability-box").keyup()
   assert.equal(total_points.innerHTML,'-2')
   inps[2].value = '18'
-  $(".ability-box:first").keyup()
+  $(".ability-box").keyup()
   assert.equal(total_points.innerHTML, "15")
 })

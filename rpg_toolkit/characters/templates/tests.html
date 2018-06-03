@@ -6,14 +6,43 @@
   <title>QUnit Example</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.6.1.css">
-</head>
-<body>
-  <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
   <script src="https://code.jquery.com/qunit/qunit-2.6.1.js"></script>
   {% load static %}
   <script src="{% static "characters/scripts.js" %}"></script>
   <script src="{% static "test/tests.js" %}"></script>
+  <style>
+  td.warn { visibility: hidden }
+  </style>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+
+  </div>
+  <table>
+    <tr class="ability">
+      <td class="warn char-warn">C</td>
+      <td class="warn range-warn">R</td>
+      <td class="ablity-name">AB1</td>
+      <td><input class='ability-box' value=10></input></td>
+    </tr>
+    <tr class="ability">
+      <td class="warn char-warn">C</td>
+      <td class="warn range-warn">R</td>
+      <td class="ablity-name">AB2<td>
+      <td><input class='ability-box' value=10></input></td>
+    </tr>
+    <tr class="ability">
+      <td class="warn char-warn">C</td>
+      <td class="warn range-warn">R</td>
+      <td class="ablity-name">AB3</td>
+      <td><input class='ability-box' value=10></input></td>
+    </tr>
+    <tr>
+      <td><span class="total-points"></span></td>
+    </tr>
+  </table>
+
 
 </body>
 </html>
