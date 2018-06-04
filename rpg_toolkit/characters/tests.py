@@ -35,7 +35,14 @@ class TestPageTest(TestCase):
     def test_test_page_returns_correct_html(self):
         request = HttpRequest()
         response = test_js(request)
-        expected_html = render_to_string('tests.html')
+        context = {'abilities': ['ability1', 'ability2', 'ability3'],
+            'races': [
+                {'race': 'Kobold',
+                 'ability_bonus': '+2 Dexterity, –4 Strength, –2 Constitution'},
+                {'race': 'Human',
+                 'ability_bonus': '+2 to One Ability Score'}
+                ]}
+        expected_html = render_to_string('tests.html', context)
         self.assertEqual(response.content.decode(), expected_html)
 
 from characters.models import Race
