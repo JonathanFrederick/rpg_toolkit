@@ -60,6 +60,11 @@ function setRaceMods(modstr) {
     for (var i=0; i < racial_mods.length; i++) {
       racial_mods[i].appendChild(radio.cloneNode(true))
     }
+  } else {
+    for (var i=0; i < racial_mods.length; i++) {
+      to_remove = racial_mods[i].getElementsByTagName('input')
+      racial_mods[i].removeChild(to_remove)
+    }
   }
 
 
