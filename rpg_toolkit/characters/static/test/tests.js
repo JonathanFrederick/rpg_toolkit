@@ -62,7 +62,9 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
   setRaceMods("+2 to One Ability Score")
   for (var i = 0; i < racial_mods.length; i++) {
     console.log(racial_mods)
-    assert.ok(racial_mods[i].innerHTML.search("<input type=radio") > -1)
+    assert.ok(racial_mods[i].innerHTML.search("<input") > -1)
+    assert.ok(racial_mods[i].innerHTML.search('type="radio"') > -1)
+    assert.ok(racial_mods[i].innerHTML.search('name="bonus-choice"') > -1)
   }
 
 })
