@@ -11,6 +11,7 @@ from django.urls import resolve
 from django.http import HttpRequest
 from characters.views import home_page, test_js
 from django.template.loader import render_to_string
+from characters.models import Race
 
 class HomePageTest(TestCase):
     def test_root_resolves_to_home_page_view(self):
@@ -20,7 +21,8 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
-        context = {'abilities': ["STR", "DEX", "CON", "INT", "WIS", "CHA"]}
+        context = {'abilities': ["STR", "DEX", "CON", "INT", "WIS", "CHA"],
+                    'races': Race.objects.all()}
         expected_html = render_to_string('home.html', context=context)
         self.assertEqual(response.content.decode(), expected_html)
 

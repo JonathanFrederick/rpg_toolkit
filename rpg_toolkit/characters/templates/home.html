@@ -12,6 +12,9 @@
   <h1>Character Creation</h1>
   <form>
     <select id="races">
+      {% for r in races %}
+      <option modstring="{{ r.ability_bonus }}">{{ r.race }}</option>
+      {% endfor %}
     </select>
     <table>
     {% for abl in abilities %}
