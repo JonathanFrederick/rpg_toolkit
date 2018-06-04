@@ -15,7 +15,8 @@ function warningVisibility(elem, warning, vis) {
 }
 
 function removeRadios() {
-  $(".racial-mod").children("input").remove()
+  // $(".racial-mod").children("input").remove()
+  $(".racial-mod").html("0")
 }
 
 function ifRadios() {
@@ -72,5 +73,11 @@ function setRaceMods(modstr) {
     }
   } else {
     removeRadios()
+    var mods = modstr.split(", ")
+    for (var i=0; i<mods.length; i++) {
+      var mod = mods[i].split(' ')
+      console.log(mod[0])
+      $('#'+mod[1]).children('.racial-mod').text(mod[0])
+    }
   }
 }

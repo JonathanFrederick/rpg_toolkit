@@ -38,7 +38,7 @@ class TestPageTest(TestCase):
         context = {'abilities': ['ability', 'bbility', 'cbility'],
             'races': [
                 {'race': 'some_race',
-                 'ability_bonus': '+2 ability, –2 bbility'},
+                 'ability_bonus': '+2 ability, -2 bbility'},
                 {'race': 'picky_race',
                  'ability_bonus': '+2 to One Ability Score'}
                 ]}
@@ -60,7 +60,7 @@ class RaceModelTest(TestCase):
     def test_assigning_ability_bonuses(self):
         gnome = Race()
         gnome.race = 'gnome'
-        gnome.ability_bonus = '+2 Constitution, +2 Charisma, –2 Strength'
+        gnome.ability_bonus = '+2 Constitution, +2 Charisma, -2 Strength'
         gnome.save()
         self.assertEqual(Race.objects.all()[0].ability_bonus,
-            '+2 Constitution, +2 Charisma, –2 Strength')
+            '+2 Constitution, +2 Charisma, -2 Strength')

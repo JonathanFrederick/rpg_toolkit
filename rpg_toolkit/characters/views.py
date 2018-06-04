@@ -13,7 +13,7 @@ def test_js(request):
     context = {'abilities': ['ability', 'bbility', 'cbility'],
                 'races': [
                     {'race': 'some_race',
-                     'ability_bonus': '+2 ability, –2 bbility'},
+                     'ability_bonus': '+2 ability, -2 bbility'},
                     {'race': 'picky_race',
                      'ability_bonus': '+2 to One Ability Score'}
                     ]}

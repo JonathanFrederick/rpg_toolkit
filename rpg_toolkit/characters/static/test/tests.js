@@ -73,7 +73,7 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
     assert.ok(racial_mods[i].getElementsByTagName('input').length == 1)
   }
 
-  setRaceMods("+2 ability, –2 bbility")
+  setRaceMods("+2 ability, -2 bbility")
   for (var i = 0; i < racial_mods.length; i++) {
   // check for removed radio button
   assert.ok(racial_mods[i].innerHTML.search("<input") == -1)
@@ -81,7 +81,7 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
   assert.ok(racial_mods[i].innerHTML.search('name="bonus-choice"') == -1)
   }
   //check for altered stats
-  assert.equal(racial_mods[0].text="+2")
-  assert.equal(racial_mods[1].text="-2")
-  assert.equal(racial_mods[1].text="0")
+  assert.equal(racial_mods[0].innerHTML, "+2")
+  assert.equal(racial_mods[1].innerHTML, "-2")
+  assert.equal(racial_mods[2].innerHTML, "0")
 })
