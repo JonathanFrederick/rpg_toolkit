@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $(".ability-box").val(10)
+    removeRadios()
     $(".ability-box").keyup(function(){
       pointsTotal()
     });
@@ -11,6 +12,14 @@ $(document).ready(function(){
 function warningVisibility(elem, warning, vis) {
   // console.log(elem)
   elem.parentElement.parentElement.getElementsByClassName(warning)[0].style.visibility=vis
+}
+
+function removeRadios() {
+  $(".racial-mod").children("input").remove()
+}
+
+function ifRadios() {
+  return $(".racial-mod").html().search("input") == -1
 }
 
 function scoreValidation(score){
@@ -51,21 +60,17 @@ function pointsTotal(){
 }
 
 function setRaceMods(modstr) {
-  console.log('modstring: ', modstr)
   racial_mods = $('.racial-mod').toArray()
   if (modstr == "+2 to One Ability Score") {
-    radio = document.createElement('input')
-    radio.type = 'radio'
-    radio.name = 'bonus-choice'
-    for (var i=0; i < racial_mods.length; i++) {
-      racial_mods[i].appendChild(radio.cloneNode(true))
+    if (ifRadios()) {
+      radio = document.createElement('input')
+      radio.type = 'radio'
+      radio.name = 'bonus-choice'
+      for (var i=0; i < racial_mods.length; i++) {
+        racial_mods[i].appendChild(radio.cloneNode(true))
+      }
     }
   } else {
-    for (var i=0; i < racial_mods.length; i++) {
-      to_remove = racial_mods[i].getElementsByTagName('input')
-      racial_mods[i].removeChild(to_remove)
-    }
+    removeRadios()
   }
-
-
 }
