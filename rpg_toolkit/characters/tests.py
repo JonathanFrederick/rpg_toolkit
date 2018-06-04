@@ -35,10 +35,10 @@ class TestPageTest(TestCase):
     def test_test_page_returns_correct_html(self):
         request = HttpRequest()
         response = test_js(request)
-        context = {'abilities': ['ability1', 'ability2', 'ability3'],
+        context = {'abilities': ['ability', 'bbility', 'cbility'],
             'races': [
                 {'race': 'some_race',
-                 'ability_bonus': '+2 ability1, –2 ability2'},
+                 'ability_bonus': '+2 ability, –2 bbility'},
                 {'race': 'picky_race',
                  'ability_bonus': '+2 to One Ability Score'}
                 ]}

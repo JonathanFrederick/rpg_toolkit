@@ -87,7 +87,7 @@ class TestAbilityScoreFunctionality:
             human_mod = fetch_race_mod(mod)
             assert '<input' in human_mod, mod+' lacks an input option'
             assert 'radio' in human_mod, mod+' lacks a radio button'
-            assert 'name=pick-bonus', mod+' lacks a name for the radio button'
+            assert 'name=bonus-choice', mod+' lacks a name for the radio button'
 
 
 
