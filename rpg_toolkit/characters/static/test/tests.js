@@ -81,4 +81,7 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
   assert.ok(racial_mods[i].innerHTML.search('name="bonus-choice"') == -1)
   }
   //check for altered stats
+  assert.equal(racial_mods[0].text="+2")
+  assert.equal(racial_mods[1].text="-2")
+  assert.equal(racial_mods[1].text="0")
 })
