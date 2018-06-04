@@ -1,8 +1,11 @@
 $(document).ready(function(){
     $(".ability-box").val(10)
     $(".ability-box").keyup(function(){
-        pointsTotal()
+      pointsTotal()
     });
+    $("option").click(function(){
+      setRaceMods($(this).attr('modstring'))
+    })
 });
 
 function warningVisibility(elem, warning, vis) {
@@ -33,7 +36,6 @@ var pointsFor = {7: -4, 8: -2, 9: -1, 10: 0,
 
 
 function pointsTotal(){
-
   var total = 0
   var scores = $('.ability-box').toArray()
   for (i = 0; i < scores.length; i++) {
@@ -46,4 +48,19 @@ function pointsTotal(){
   } else {
     $(".total-points").text(total);
   }
+}
+
+function setRaceMods(modstr) {
+  console.log('modstring: ', modstr)
+  racial_mods = $('.racial-mod').toArray()
+  if (modstr == "+2 to One Ability Score") {
+    radio = document.createElement('input')
+    radio.type = 'radio'
+    radio.name = 'bonus-choice'
+    for (var i=0; i < racial_mods.length; i++) {
+      racial_mods[i].appendChild(radio.cloneNode(true))
+    }
+  }
+
+
 }
