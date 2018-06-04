@@ -37,9 +37,9 @@ class TestPageTest(TestCase):
         response = test_js(request)
         context = {'abilities': ['ability1', 'ability2', 'ability3'],
             'races': [
-                {'race': 'Kobold',
-                 'ability_bonus': '+2 Dexterity, –4 Strength, –2 Constitution'},
-                {'race': 'Human',
+                {'race': 'some_race',
+                 'ability_bonus': '+2 ability1, –2 ability2'},
+                {'race': 'picky_race',
                  'ability_bonus': '+2 to One Ability Score'}
                 ]}
         expected_html = render_to_string('tests.html', context)
