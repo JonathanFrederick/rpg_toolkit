@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from characters.models import Race
 
 def home_page(request):
-    context = {'abilities': ["STR", "DEX", "CON", "INT", "WIS", "CHA"],
+    context = {'abilities': ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"],
                'races': Race.objects.all()}
     return render(request, 'home.html', context=context)
 

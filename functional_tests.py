@@ -68,22 +68,22 @@ class TestAbilityScoreFunctionality:
             .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
         select_race = Select(self.browser.find_element_by_id('races'))
         select_race.select_by_visible_text('Halfling')
-        assert fetch_race_mod('STR') == '-2'
-        assert fetch_race_mod('DEX') == '+2'
-        assert fetch_race_mod('CON') == '0'
+        assert fetch_race_mod('Strength') == '-2'
+        assert fetch_race_mod('Dexterity') == '+2'
+        assert fetch_race_mod('Constitution') == '0'
 
         select_race.select_by_visible_text('Elf')
-        assert fetch_race_mod('STR') == '0'
-        assert fetch_race_mod('CON') == '-2'
-        assert fetch_race_mod('INT') == '+2'
+        assert fetch_race_mod('Strength') == '0'
+        assert fetch_race_mod('Constitution') == '-2'
+        assert fetch_race_mod('Intelligence') == '+2'
 
         select_race.select_by_visible_text('Human')
         racial_mods[0].find_element_by_tag_name('input').click()
         assert racial_mods[0].find_element_by_tag_name('input').is_selected(), \
             'clicked radio button is not selected'
-        assert '+2' in fetch_race_mod('STR'), 'selected doesn\'t show bonus'
+        assert '+2' in fetch_race_mod('Strength'), 'selected doesn\'t show bonus'
 
-        for mod in ('STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'):
+        for mod in ('Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'):
             human_mod = fetch_race_mod(mod)
             assert '<input' in human_mod, mod+' lacks an input option'
             assert 'radio' in human_mod, mod+' lacks a radio button'
