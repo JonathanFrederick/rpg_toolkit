@@ -56,3 +56,13 @@ QUnit.test( "total points tests", function( assert ) {
   assert.equal(total_points.innerHTML, "15")
 
 })
+
+QUnit.test( "racial abilty bonus set tests", function( assert ) {
+  var racial_mods = $('.racial-mod').toArray()
+  setRaceMods("+2 to One Ability Score")
+  for (var i = 0; i < racial_mods.length; i++) {
+    console.log(racial_mods)
+    assert.ok(racial_mods[i].text.search("<input type=radio") > -1)
+  }
+
+})
