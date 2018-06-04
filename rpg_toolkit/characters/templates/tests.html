@@ -19,25 +19,21 @@
   <div id="qunit-fixture">
     <!--TODO: figure out how to use this -->
   </div>
+  <select id="races">
+    {% for r in races %}
+    <option modstring="{{ r.ability_bonus }}">{{ r.race }}</option>
+    {% endfor %}
+  </select>
   <table>
-    <tr class="ability">
+    {% for abl in abilities %}
+    <tr class="ability" id="{{ abl }}">
       <td class="warn char-warn">C</td>
       <td class="warn range-warn">R</td>
-      <td class="ablity-name">AB1</td>
+      <td class="ablity-name">{{ abl }}</td>
       <td><input class='ability-box' value=10></input></td>
+      <td class="racial-mod"></td>
     </tr>
-    <tr class="ability">
-      <td class="warn char-warn">C</td>
-      <td class="warn range-warn">R</td>
-      <td class="ablity-name">AB2<td>
-      <td><input class='ability-box' value=10></input></td>
-    </tr>
-    <tr class="ability">
-      <td class="warn char-warn">C</td>
-      <td class="warn range-warn">R</td>
-      <td class="ablity-name">AB3</td>
-      <td><input class='ability-box' value=10></input></td>
-    </tr>
+    {% endfor %}
     <tr>
       <td><span class="total-points"></span></td>
     </tr>
