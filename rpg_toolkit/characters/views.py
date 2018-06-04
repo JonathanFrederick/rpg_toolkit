@@ -10,10 +10,10 @@ def home_page(request):
     return render(request, 'home.html', context=context)
 
 def test_js(request):
-    context = {'abilities': ['ability1', 'ability2', 'ability3'],
+    context = {'abilities': ['ability', 'bbility', 'cbility'],
                 'races': [
                     {'race': 'some_race',
-                     'ability_bonus': '+2 ability1, –2 ability2'},
+                     'ability_bonus': '+2 ability, –2 bbility'},
                     {'race': 'picky_race',
                      'ability_bonus': '+2 to One Ability Score'}
                     ]}
