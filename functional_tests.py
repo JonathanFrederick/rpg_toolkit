@@ -57,7 +57,7 @@ class TestAbilityScoreFunctionality:
         assert total_points.get_attribute('innerHTML') == '-4'
         send_ability('no')
         assert total_points.get_attribute('innerHTML') == '⚠'
-
+        send_ability('10')
         # check for elements for racial bonus with 0 for the initial value
         racial_mods = self.browser.find_elements_by_class_name('racial-mod')
         assert len(racial_mods) == 6, 'Not enough racial mod elements'
@@ -66,28 +66,33 @@ class TestAbilityScoreFunctionality:
         def fetch_race_mod(ability):
             return self.browser.find_element_by_id(ability) \
             .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
-        select_race = Select(self.browser.find_element_by_id('races'))
-        select_race.select_by_visible_text('Halfling')
+        def click_option(race):
+            self.browser.execute_script("document.getElementById(\""+race+"\").click()")
+        # select_race = Select(self.browser.find_element_by_id('races'))
+        # self.browser.find_element_by_tag_name('select').click()
+        click_option('Halfling')
         assert fetch_race_mod('Strength') == '-2'
         assert fetch_race_mod('Dexterity') == '+2'
         assert fetch_race_mod('Constitution') == '0'
 
-        select_race.select_by_visible_text('Elf')
+        click_option('Elf')
         assert fetch_race_mod('Strength') == '0'
         assert fetch_race_mod('Constitution') == '-2'
         assert fetch_race_mod('Intelligence') == '+2'
 
-        select_race.select_by_visible_text('Human')
-        racial_mods[0].find_element_by_tag_name('input').click()
-        assert racial_mods[0].find_element_by_tag_name('input').is_selected(), \
+        # select_race.select_by_visible_text('Human')
+        click_option('Human')
+        # sleep(3)
+        radio = racial_mods[0].find_element_by_xpath('../td[@class="radio-cell"]/input')
+        radio.click()
+        assert radio.is_selected(), \
             'clicked radio button is not selected'
         assert '+2' in fetch_race_mod('Strength'), 'selected doesn\'t show bonus'
 
-        for mod in ('Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'):
-            human_mod = fetch_race_mod(mod)
-            assert '<input' in human_mod, mod+' lacks an input option'
-            assert 'radio' in human_mod, mod+' lacks a radio button'
-            assert 'name=bonus-choice', mod+' lacks a name for the radio button'
+        for cell in self.browser.find_elements_by_class_name('radio-cell'):
+            assert '<input' in cell.get_attribute('innerHTML'), ' lacks an input option'
+            assert 'radio' in cell.get_attribute('innerHTML'), ' lacks a radio button'
+            assert 'name=bonus-choice', ' lacks a name for the radio button'
 
 
 
