@@ -5,18 +5,32 @@
   <script src="{% static "characters/scripts.js" %}"></script>
   <style>
   td.warn { visibility: hidden }
+  td.racial-mod {
+    width: 30px;
+    text-align: right;
+  }
   </style>
   <title>Character Creation</title>
 </head>
 <body>
   <h1>Character Creation</h1>
   <form>
-    <select id="races">
+    Race: <select id="races">
       {% for r in races %}
       <option modstring="{{ r.ability_bonus }}">{{ r.race }}</option>
       {% endfor %}
     </select>
     <table>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Ability</td>
+      <td>Value</td>
+      <td>Racial</td>
+      <td>Final</td>
+      <td>Mod</td>
+
+    </tr>
     {% for abl in abilities %}
     <tr class="ability" id="{{ abl }}">
       <td class="warn char-warn" title="only digits, please">&#9888;</td>
@@ -24,6 +38,8 @@
       <td class="ablity-name">{{ abl }}</td>
       <td><input class='ability-box' value=10></input></td>
       <td class="racial-mod"></td>
+      <td class="calculated"></td>
+      <td class="ability-mod"></td>
     </tr>
     {% endfor %}
     </table>
