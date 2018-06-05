@@ -89,6 +89,11 @@ QUnit.test( "radio button change test", function( assert ){
   //test that radio buttons add +2 to racial-mod
   setRaceMods("+2 to One Ability Score")
   var radio_cells = $('.radio-cell').toArray()
+  var racial_mods = $('.racial-mod').toArray()
   $('.radio-cell:first').children('input:first').click()
-  assert.ok(radio_cells[0].text == '+2')
+  assert.ok(racial_mods[0].text == '+2')
+  assert.ok(racial_mods[1].text == '0')
+  $('.radio-cell:nth-of-type(2)').children('input:first').click()
+  assert.ok(racial_mods[0].text == '0')
+  assert.ok(racial_mods[1].text == '+2')
 })
