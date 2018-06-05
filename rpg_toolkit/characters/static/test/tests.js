@@ -93,7 +93,7 @@ QUnit.test( "radio button change test", function( assert ){
   $('.radio-cell:first').children('input:first').click()
   assert.equal(racial_mods[0].innerHTML, '+2')
   assert.equal(racial_mods[1].innerHTML, '0')
-  $('tr:nth-of-type(3)').children('.radio-cell').children('input').click()
+  $('tr:nth-of-type(2)').children('.radio-cell').children('input').click()
   assert.equal(racial_mods[0].innerHTML, '0')
   assert.equal(racial_mods[1].innerHTML, '+2')
 })
