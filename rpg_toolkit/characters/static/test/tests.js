@@ -60,28 +60,35 @@ QUnit.test( "total points tests", function( assert ) {
 QUnit.test( "racial abilty bonus set tests", function( assert ) {
   var racial_mods = $('.racial-mod').toArray()
   setRaceMods("+2 to One Ability Score")
-  for (var i = 0; i < racial_mods.length; i++) {
+  var radio_cells = $('.radio-cell').toArray()
+  assert.equal(radio_cells.length, 3)
+  assert.equal($('.radio-cell').children('input').length, 3)
+  for (var i = 0; i < radio_cells.length; i++) {
     // check that radio button was added
-    assert.ok(racial_mods[i].innerHTML.search("<input") > -1)
-    assert.ok(racial_mods[i].innerHTML.search('type="radio"') > -1)
-    assert.ok(racial_mods[i].innerHTML.search('name="bonus-choice"') > -1)
+    assert.ok(radio_cells[i].innerHTML.search("<input") > -1)
+    assert.ok(radio_cells[i].innerHTML.search('type="radio"') > -1)
+    assert.ok(radio_cells[i].innerHTML.search('name="bonus-choice"') > -1)
   }
   setRaceMods("+2 to One Ability Score")
-  for (var i = 0; i < racial_mods.length; i++) {
+  for (var i = 0; i < radio_cells.length; i++) {
     // check for only one radio button
-    console.log(racial_mods[i])
-    assert.ok(racial_mods[i].getElementsByTagName('input').length == 1)
+    assert.ok(radio_cells[i].getElementsByTagName('input').length == 1)
   }
 
   setRaceMods("+2 ability, -2 bbility")
-  for (var i = 0; i < racial_mods.length; i++) {
-  // check for removed radio button
-  assert.ok(racial_mods[i].innerHTML.search("<input") == -1)
-  assert.ok(racial_mods[i].innerHTML.search('type="radio"') == -1)
-  assert.ok(racial_mods[i].innerHTML.search('name="bonus-choice"') == -1)
-  }
+  // check for removed radio buttons
+  assert.notOk($("radio-cell").toArray().length)
   //check for altered stats
   assert.equal(racial_mods[0].innerHTML, "+2")
   assert.equal(racial_mods[1].innerHTML, "-2")
   assert.equal(racial_mods[2].innerHTML, "0")
+})
+
+
+QUnit.test( "radio button change test", function( assert ){
+  //test that radio buttons add +2 to racial-mod
+  setRaceMods("+2 to One Ability Score")
+  var radio_cells = $('.radio-cell').toArray()
+  $('.radio-cell:first').children('input:first').click()
+  assert.ok(radio_cells[0].text == '+2')
 })
