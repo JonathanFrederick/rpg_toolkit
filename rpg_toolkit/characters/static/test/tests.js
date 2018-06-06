@@ -99,3 +99,23 @@ QUnit.test( "radio button change test", function( assert ){
   assert.equal(racial_mods[0].innerHTML, '0')
   assert.equal(racial_mods[1].innerHTML, '+2')
 })
+
+QUnit.test( "totals calculated test", function( assert ) {
+  setRaceMods("+2 ability, -2 bbility")
+  abilityTotals()
+  $(".ability-box").val(10)
+  var ability_totals = $(".calculated").toArray()
+  assert.equal(ability_totals[0].innerHTML, "12")
+  assert.equal(ability_totals[1].innerHTML, "8")
+  assert.equal(ability_totals[2].innerHTML, "10")
+})
+
+QUnit.test( "ability mods calculated test" , function( assert ) {
+  setRaceMods("+2 ability, -2 bbility")
+  abilityMods()
+  $(".ability-box").val(10)
+  var ability_totals = $(".ability-mod").toArray()
+  assert.equal(ability_totals[0].innerHTML, "+1")
+  assert.equal(ability_totals[1].innerHTML, "-1")
+  assert.equal(ability_totals[2].innerHTML, "0")
+})
