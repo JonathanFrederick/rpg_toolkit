@@ -16,6 +16,7 @@ function warningVisibility(elem, warning, vis) {
 
 function removeRadios() {
   $(".radio-cell").remove()
+  $(".radio-cell-head").remove()
 }
 
 function ifRadios() {
@@ -81,6 +82,10 @@ function setRaceMods(modstr) {
       radio_cell = document.createElement('td')
       radio_cell.className = 'radio-cell'
       radio_cell.appendChild(radio)
+      radio_title = document.createElement('td')
+      radio_title.className = 'radio-cell'
+      console.log(radio_title)
+      $('#racial-mod-head').after(radio_title)
       for (var i=0; i < racial_mods.length; i++) {
         racial_mods[i].after(radio_cell.cloneNode(true))
       }
