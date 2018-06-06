@@ -88,7 +88,6 @@ class TestAbilityScoreFunctionality:
         assert radio.is_selected(), \
             'clicked radio button is not selected'
         assert '+2' in fetch_race_mod('Strength'), 'selected doesn\'t show bonus'
-
         for cell in self.browser.find_elements_by_class_name('radio-cell'):
             assert '<input' in cell.get_attribute('innerHTML'), ' lacks an input option'
             assert 'radio' in cell.get_attribute('innerHTML'), ' lacks a radio button'

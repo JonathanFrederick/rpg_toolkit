@@ -83,7 +83,7 @@ function setRaceMods(modstr) {
       radio_cell.className = 'radio-cell'
       radio_cell.appendChild(radio)
       radio_title = document.createElement('td')
-      radio_title.className = 'radio-cell'
+      radio_title.id = 'radio-cell-head'
       console.log(radio_title)
       $('#racial-mod-head').after(radio_title)
       for (var i=0; i < racial_mods.length; i++) {
