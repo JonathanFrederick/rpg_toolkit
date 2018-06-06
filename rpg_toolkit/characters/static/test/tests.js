@@ -89,6 +89,9 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
 
 QUnit.test( "radio button change test", function( assert ){
   //test that radio buttons add +2 to racial-mod
+  $(".ability-box").val(10)
+
+  resetMods()
   setRaceMods("+2 to One Ability Score")
   var radio_cells = $('.radio-cell').toArray()
   var racial_mods = $('.racial-mod').toArray()
@@ -101,6 +104,7 @@ QUnit.test( "radio button change test", function( assert ){
 })
 
 QUnit.test( "totals calculated test", function( assert ) {
+  resetMods()
   setRaceMods("+2 ability, -2 bbility")
   abilityTotals()
   $(".ability-box").val(10)
@@ -111,11 +115,13 @@ QUnit.test( "totals calculated test", function( assert ) {
 })
 
 QUnit.test( "ability mods calculated test" , function( assert ) {
+  resetMods()
   setRaceMods("+2 ability, -2 bbility")
+  abilityTotals()
   abilityMods()
   $(".ability-box").val(10)
   var ability_totals = $(".ability-mod").toArray()
   assert.equal(ability_totals[0].innerHTML, "+1")
   assert.equal(ability_totals[1].innerHTML, "-1")
-  assert.equal(ability_totals[2].innerHTML, "0")
+  assert.equal(ability_totals[2].innerHTML, "+0")
 })
