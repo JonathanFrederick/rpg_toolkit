@@ -39,21 +39,22 @@ QUnit.test( "score validation test", function( assert ) {
 QUnit.test( "total points tests", function( assert ) {
   var inps = $(".ability-box").toArray()
   var total_points = $(".total-points").get(0)
+
   inps[0].value = '12'
   $(".ability-box").keyup()
-  assert.equal(total_points.innerHTML, '2')
+  assert.equal(total_points.innerHTML, '2' ,'12/10/10 costs 2')
   inps[1].value = '-7'
   $(".ability-box").keyup()
-  assert.equal(total_points.innerHTML,'\u26A0')
+  assert.equal(total_points.innerHTML,'\u26A0', '-7 gives warning in points totals')
   inps[1].value = '7'
   $(".ability-box").keyup()
-  assert.equal(total_points.innerHTML,'-2')
+  assert.equal(total_points.innerHTML,'-2', '12/7/10 costs -2')
   inps[2].value = 'ac'
   $(".ability-box").keyup()
-  assert.equal(total_points.innerHTML, "\u26A0")
+  assert.equal(total_points.innerHTML, "\u26A0", 'alpha characters show warning in points totals')
   inps[2].value = '18'
   $(".ability-box").keyup()
-  assert.equal(total_points.innerHTML, "15")
+  assert.equal(total_points.innerHTML, "15", '12/7/18 costs 15')
 
 })
 
@@ -61,6 +62,7 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
   var racial_mods = $('.racial-mod').toArray()
   setRaceMods("+2 to One Ability Score")
   var radio_cells = $('.radio-cell').toArray()
+
   assert.equal(radio_cells.length, 3)
   assert.equal($('.radio-cell').children('input').length, 3)
   for (var i = 0; i < radio_cells.length; i++) {
@@ -78,7 +80,7 @@ QUnit.test( "racial abilty bonus set tests", function( assert ) {
   setRaceMods("+2 ability, -2 bbility")
   // check for removed radio buttons
   assert.notOk($("radio-cell").toArray().length)
-  //check for altered stats
+  // check for altered stats
   assert.equal(racial_mods[0].innerHTML, "+2")
   assert.equal(racial_mods[1].innerHTML, "-2")
   assert.equal(racial_mods[2].innerHTML, "0")
