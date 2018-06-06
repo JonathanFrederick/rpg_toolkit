@@ -93,9 +93,23 @@ class TestAbilityScoreFunctionality:
             assert 'radio' in cell.get_attribute('innerHTML'), ' lacks a radio button'
             assert 'name=bonus-choice', ' lacks a name for the radio button'
 
+        def fetch_calculated_score(ability):
+            return self.browser.find_element_by_id(ability) \
+            .find_element_by_class_name('calculated').get_attribute('innerHTML')
+
         # check that racial bonuses are accurately applied to ability totals
         click_option('Halfling')
+        for el in self.browser.find_elements_by_class_name('ability-box'):
+            send_ability('10', el)
+        assert fetch_calculated_score('Strength') == '8'
+        assert fetch_calculated_score('Dexterity') == '12'
+        assert fetch_calculated_score('Constitution') == '10'
 
         # check for accurate modifier calculations
-
+        def fetch_ability_mod(ability):
+            return self.browser.find_element_by_id(ability) \
+            .find_element_by_class_name('ability-mod').get_attribute('innerHTML')
+        assert fetch_ability_mod('Strength') == '-1'
+        assert fetch_ability_mod('Dexterity') == '+1'
+        assert fetch_ability_mod('Constitution') == '0'
         # check for arrows that increase and decrease values
