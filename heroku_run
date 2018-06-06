@@ -1,0 +1,4 @@
+cd rpg_toolkit
+python manage.py migrate
+python manage.py populate
+gunicorn rpg_toolkit.wsgi --log-file -
