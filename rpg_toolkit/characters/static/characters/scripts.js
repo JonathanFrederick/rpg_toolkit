@@ -4,6 +4,9 @@ $(document).ready(function(){
     removeRadios()
     $(".ability-box").keyup(function(){
       pointsTotal()
+      abilityTotals()
+      abilityMods()
+
     });
     $("option").click(function(){
       setRaceMods($(this).attr('modstring'))
@@ -53,6 +56,19 @@ function noteChoice(elem) {
   elem.parentNode.previousSibling.innerHTML = '+2'
 }
 
+function abilityTotals() {
+  rows = $('.ability').toArray()
+  for (i=0; i<rows.length; i++) {
+    rows[i].getElementsByClassName('calculated')[0].innerHTML =
+      Number(rows[i].getElementsByClassName('ability-box')[0].value) +
+      Number(rows[i].getElementsByClassName('racial-mod')[0].innerHTML)
+  }
+
+}
+
+function abilityMods() {
+
+}
 
 function pointsTotal() {
   var total = 0
