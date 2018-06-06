@@ -10,7 +10,12 @@ $(document).ready(function(){
     });
     $("option").click(function(){
       setRaceMods($(this).attr('modstring'))
+      abilityTotals()
+      abilityMods()
     })
+    pointsTotal()
+    abilityTotals()
+    abilityMods()
 });
 
 function warningVisibility(elem, warning, vis) {
@@ -19,7 +24,7 @@ function warningVisibility(elem, warning, vis) {
 
 function removeRadios() {
   $(".radio-cell").remove()
-  $(".radio-cell-head").remove()
+  $("#radio-cell-head").remove()
 }
 
 function ifRadios() {
@@ -54,6 +59,8 @@ var pointsFor = {7: -4, 8: -2, 9: -1, 10: 0,
 function noteChoice(elem) {
   resetMods()
   elem.parentNode.previousSibling.innerHTML = '+2'
+  abilityTotals()
+  abilityMods()
 }
 
 function abilityTotals() {
@@ -67,7 +74,15 @@ function abilityTotals() {
 }
 
 function abilityMods() {
+  rows = $('.ability').toArray()
+  for (i=0; i<rows.length; i++) {
+    m = Math.floor((Number(rows[i].getElementsByClassName('calculated')[0].innerHTML)-10)/2)
+    if (m >= 0) {
+      m = '+'+m
+    }
+    rows[i].getElementsByClassName('ability-mod')[0].innerHTML = m
 
+  }
 }
 
 function pointsTotal() {
@@ -100,7 +115,7 @@ function setRaceMods(modstr) {
       radio_cell.appendChild(radio)
       radio_title = document.createElement('td')
       radio_title.id = 'radio-cell-head'
-      console.log(radio_title)
+      // console.log(radio_title)
       $('#racial-mod-head').after(radio_title)
       for (var i=0; i < racial_mods.length; i++) {
         racial_mods[i].after(radio_cell.cloneNode(true))
