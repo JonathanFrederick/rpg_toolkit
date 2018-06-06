@@ -27,10 +27,10 @@ class TestAbilityScoreFunctionality:
         assert top_box.get_attribute('value') == '10'
 
         # check for warnings for different inputs
-        def send_ability(val):
-            top_box.clear()
-            top_box.send_keys(val)
-            return top_box.get_attribute('value')
+        def send_ability(val, element=top_box):
+            element.clear()
+            element.send_keys(val)
+            return element.get_attribute('value')
         send_ability('12')
         assert not char_warn.is_displayed()
         assert not range_warn.is_displayed()
@@ -93,10 +93,8 @@ class TestAbilityScoreFunctionality:
             assert 'radio' in cell.get_attribute('innerHTML'), ' lacks a radio button'
             assert 'name=bonus-choice', ' lacks a name for the radio button'
 
-
-
-
         # check that racial bonuses are accurately applied to ability totals
+        click_option('Halfling')
 
         # check for accurate modifier calculations
 
