@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from time import sleep
 
@@ -67,10 +68,12 @@ class TestAbilityScoreFunctionality:
             return self.browser.find_element_by_id(ability) \
             .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
         def click_option(race):
-            self.browser.execute_script("document.getElementById(\""+race+"\").click()")
-        # select_race = Select(self.browser.find_element_by_id('races'))
-        # self.browser.find_element_by_tag_name('select').click()
+            sleep(3)
+            select_race = Select(self.browser.find_element_by_id('races'))
+            select_race.select_by_visible_text(race)
+            self.browser.find_element_by_id('races').send_keys(Keys.ENTER)
         click_option('Halfling')
+
         assert fetch_race_mod('Strength') == '-2'
         assert fetch_race_mod('Dexterity') == '+2'
         assert fetch_race_mod('Constitution') == '0'
@@ -111,5 +114,5 @@ class TestAbilityScoreFunctionality:
             .find_element_by_class_name('ability-mod').get_attribute('innerHTML')
         assert fetch_ability_mod('Strength') == '-1'
         assert fetch_ability_mod('Dexterity') == '+1'
-        assert fetch_ability_mod('Constitution') == '0'
+        assert fetch_ability_mod('Constitution') == '+0'
         # check for arrows that increase and decrease values

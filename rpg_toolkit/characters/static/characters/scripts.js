@@ -8,8 +8,8 @@ $(document).ready(function(){
       abilityMods()
 
     });
-    $("option").click(function(){
-      setRaceMods($(this).attr('modstring'))
+    $("select").change(function(){
+      setRaceMods($(this).find(':selected').attr('modstring'))
       abilityTotals()
       abilityMods()
     })
