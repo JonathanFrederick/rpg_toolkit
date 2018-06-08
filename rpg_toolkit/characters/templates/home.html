@@ -20,7 +20,7 @@
   <form>
     Race: <select id="races">
       {% for r in races %}
-      <option id="{{ r.race }}" modstring="{{ r.ability_bonus }}">{{ r.race }}</option>
+      <option id="{{ r.race }}" title="{{ r.ability_bonus }}">{{ r.race }}</option>
       {% endfor %}
     </select>
     <table>

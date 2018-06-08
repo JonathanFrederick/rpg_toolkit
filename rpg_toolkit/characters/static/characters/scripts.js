@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     });
     $("select").change(function(){
-      setRaceMods($(this).find(':selected').attr('modstring'))
+      setRaceMods($(this).find(':selected').attr('title'))
       abilityTotals()
       abilityMods()
     })
