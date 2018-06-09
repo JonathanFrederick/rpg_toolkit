@@ -27,7 +27,7 @@ function removeRadios() {
   $("#radio-cell-head").remove()
 }
 
-function ifRadios() {
+function ifNoRadios() {
   return $(".radio-cell").toArray().length == 0
 }
 
@@ -81,7 +81,6 @@ function abilityMods() {
       m = '+'+m
     }
     rows[i].getElementsByClassName('ability-mod')[0].innerHTML = m
-
   }
 }
 
@@ -101,25 +100,19 @@ function pointsTotal() {
 }
 
 function setRaceMods(modstr) {
-  racial_mods = $('.racial-mod').toArray()
   if (modstr == "+2 to One Ability Score") {
-    if (ifRadios()) {
+    if (ifNoRadios()) {
       resetMods()
       radio = document.createElement('input')
       radio.type = 'radio'
       radio.name = 'bonus-choice'
-      // radio.addEventListener("click", noteChoice;
-      // radio.addEventListener("click", alert('HI'))
       radio_cell = document.createElement('td')
       radio_cell.className = 'radio-cell'
       radio_cell.appendChild(radio)
       radio_title = document.createElement('td')
       radio_title.id = 'radio-cell-head'
-      // console.log(radio_title)
       $('#racial-mod-head').after(radio_title)
-      for (var i=0; i < racial_mods.length; i++) {
-        racial_mods[i].after(radio_cell.cloneNode(true))
-      }
+      $('.racial-mod').after(radio_cell.cloneNode(true))
       $('.radio-cell').children('input').click(function() {
         noteChoice(this)
       })
