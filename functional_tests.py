@@ -68,7 +68,6 @@ class TestAbilityScoreFunctionality:
             return self.browser.find_element_by_id(ability) \
             .find_element_by_class_name('racial-mod').get_attribute('innerHTML')
         def click_option(race):
-            sleep(3)
             select_race = Select(self.browser.find_element_by_id('races'))
             select_race.select_by_visible_text(race)
             self.browser.find_element_by_id('races').send_keys(Keys.ENTER)
@@ -85,7 +84,6 @@ class TestAbilityScoreFunctionality:
 
         # select_race.select_by_visible_text('Human')
         click_option('Human')
-        # sleep(3)
         radio = racial_mods[0].find_element_by_xpath('../td[@class="radio-cell"]/input')
         radio.click()
         assert radio.is_selected(), \
