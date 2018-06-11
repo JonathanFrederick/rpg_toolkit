@@ -32,21 +32,17 @@ class TestAbilityScoreFunctionality:
             element.clear()
             element.send_keys(val)
             return element.get_attribute('value')
-        send_ability('12')
-        assert not char_warn.is_displayed()
-        assert not range_warn.is_displayed()
-        send_ability('8a')
-        assert char_warn.is_displayed()
-        assert not range_warn.is_displayed()
-        send_ability('6')
-        assert not char_warn.is_displayed()
-        assert range_warn.is_displayed()
-        send_ability('19')
-        assert not char_warn.is_displayed()
-        assert range_warn.is_displayed()
-        send_ability('yz')
-        assert char_warn.is_displayed()
-        assert range_warn.is_displayed()
+
+        def warn_asserts(val, ch, ra):  # string, bool, bool
+            send_ability(val)
+            assert char_warn.is_displayed() == ch
+            assert range_warn.is_displayed() == ra
+
+        warn_asserts('12', False, False)
+        warn_asserts('8a', True, False)
+        warn_asserts('6', False, True)
+        warn_asserts('19', False, True)
+        warn_asserts('yz', True, True)
 
         # check that total points spent is accurately calculated
         send_ability('10')
