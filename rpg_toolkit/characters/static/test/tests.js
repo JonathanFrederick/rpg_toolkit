@@ -8,38 +8,26 @@ QUnit.test( "score validation test", function( assert ) {
   var char_warn = $(".char-warn").get(0)
   var range_warn = $(".range-warn").get(0)
 
+  function helper(string_in, string_out, char_val, range_val) {
+    inp.value = string_in
+    assert.equal(string_out, scoreValidation(inp),
+      "value "+string_in+" returns "+string_out)
+    assert.ok(char_warn.style.visibility == char_val,
+      string_in+" makes char-warn "+char_val)
+    assert.ok(range_warn.style.visibility == range_val,
+      string_in+" makes char-warn "+range_val)
+  }
 
-  inp.value = '10'
-  assert.equal(10, scoreValidation(inp), "value 10 returns number 10")
-  assert.ok(char_warn.style.visibility == "hidden", "10 hides char-warn")
-  assert.ok(range_warn.style.visibility == "hidden", "10 hides range-warn")
-
-  inp.value = "6"
-  assert.ok(6 == scoreValidation(inp), "value 6 returns number 6")
-  assert.ok(char_warn.style.visibility == "hidden", "6 hides char-warn")
-  assert.ok(range_warn.style.visibility == "visible", "6 shows range-warn")
-
-  inp.value = "14"
-  assert.ok(14 == scoreValidation(inp), "value 14 returns number 14")
-  assert.ok(char_warn.style.visibility == "hidden", "14 hides char-warn")
-  assert.ok(range_warn.style.visibility == "hidden", "14 hides range-warn")
-
-  inp.value = "ab"
-  assert.ok(0 == scoreValidation(inp), "value ab returns number ab")
-  assert.ok(char_warn.style.visibility == "visible", "ab shows char-warn")
-  assert.ok(range_warn.style.visibility == "visible", "ab shows range-warn")
-
-  inp.value = "10c"
-  assert.ok(10 == scoreValidation(inp), "value 10c returns number 10")
-  assert.ok(char_warn.style.visibility == "visible", "10c shows char-warn")
-  assert.ok(range_warn.style.visibility == "hidden", "10c hides range-warn")
-
+  helper('10', 10, "hidden", "hidden")
+  helper('6', 6, "hidden", "visible")
+  helper('14', 14, "hidden", "hidden")
+  helper('ab', 0, "visible", "visible")
+  helper('10c', 10, "visible", "hidden")
 })
 
 QUnit.test( "total points tests", function( assert ) {
   var inps = $(".ability-box").toArray()
   var total_points = $(".total-points").get(0)
-
   inps[0].value = '12'
   $(".ability-box").keyup()
   assert.equal(total_points.innerHTML, '2' ,'12/10/10 costs 2')
