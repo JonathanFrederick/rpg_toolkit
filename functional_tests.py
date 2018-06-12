@@ -45,15 +45,17 @@ class TestAbilityScoreFunctionality:
         warn_asserts('yz', True, True)
 
         # check that total points spent is accurately calculated
-        send_ability('10')
         total_points = self.browser.find_element_by_class_name('total-points')
-        assert total_points.get_attribute('innerHTML') == '0'
-        send_ability('12')
-        assert total_points.get_attribute('innerHTML') == '2'
-        send_ability('7')
-        assert total_points.get_attribute('innerHTML') == '-4'
-        send_ability('no')
-        assert total_points.get_attribute('innerHTML') == '⚠'
+        def total_assert(sent, result):
+            send_ability(sent)
+            res = total_points.get_attribute('innerHTML')
+            assert res == result, sent+" shows total of "+res
+
+        total_assert('10', '0')
+        total_assert('12', '2')
+        total_assert('7', '-4')
+        total_assert('no', '⚠')
+
         send_ability('10')
         # check for elements for racial bonus with 0 for the initial value
         racial_mods = self.browser.find_elements_by_class_name('racial-mod')
