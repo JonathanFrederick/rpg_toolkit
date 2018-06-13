@@ -2,6 +2,9 @@ $(document).ready(function(){
     $(".ability-box").val(10)
     resetMods()
     removeRadios()
+    pointsTotal()
+    abilityTotals()
+    abilityMods()
     $(".ability-box").keyup(function(){
       pointsTotal()
       abilityTotals()
@@ -13,12 +16,12 @@ $(document).ready(function(){
       abilityTotals()
       abilityMods()
     })
-    pointsTotal()
-    abilityTotals()
-    abilityMods()
+
 });
 
 function warningVisibility(elem, warning, vis) {
+  // warning=['char-warn'|'range-warn'], vis=['hidden'|'visible']
+  // find the warning in the same table row of the given type and set it to a given value
   elem.parentElement.parentElement.getElementsByClassName(warning)[0].style.visibility=vis
 }
 
@@ -36,14 +39,17 @@ function resetMods(){
 }
 
 function scoreValidation(score){
+  // check for non-digits in input string
   var non_digs = new RegExp("[^0-9]", "g")
   var new_score = score.value.replace(non_digs, "")
+  // display warning if non-digits in input string, hide otherwise
   if (new_score != score.value) {
     warningVisibility(score, "char-warn", "visible")
   } else {
     warningVisibility(score, "char-warn", "hidden")
   }
-  var num_score = Number(new_score)
+  var num_score = Number(new_score) // input string to integer
+  // check that integer is in allowed range, display warning if not, hide otherwise
   if (num_score > 18 || num_score < 7) {
     warningVisibility(score, "range-warn", "visible")
   } else {
@@ -52,13 +58,15 @@ function scoreValidation(score){
   return num_score
 }
 
+// points values for each ability value
 var pointsFor = {7: -4, 8: -2, 9: -1, 10: 0,
                  11: 1, 12: 2, 13: 3, 14: 5,
                  15: 7, 16: 10, 17: 13, 18: 17}
 
 function noteChoice(elem) {
-  resetMods()
-  elem.parentNode.previousSibling.innerHTML = '+2'
+  resetMods()  // reset all mods to '0'
+  elem.parentNode.previousSibling.innerHTML = '+2' // set selected ability mod to '+2'
+  //recalculate total and mods
   abilityTotals()
   abilityMods()
 }
@@ -70,7 +78,6 @@ function abilityTotals() {
       Number(rows[i].getElementsByClassName('ability-box')[0].value) +
       Number(rows[i].getElementsByClassName('racial-mod')[0].innerHTML)
   }
-
 }
 
 function abilityMods() {
