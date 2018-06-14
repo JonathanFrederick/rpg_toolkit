@@ -64,3 +64,11 @@ class RaceModelTest(TestCase):
         gnome.save()
         self.assertEqual(Race.objects.all()[0].ability_bonus,
             '+2 Constitution, +2 Charisma, -2 Strength')
+
+    def test_assigning_prd_url(self):
+        half_elf = Race()
+        half_elf.race = 'half_elf'
+        half_elf.prd_url = 'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/halfElves.html'
+        half_elf.save()
+        self.assertEqual(Race.objects.all()[0].prd_url,
+            'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/halfElves.html')
