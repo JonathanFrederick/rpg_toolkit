@@ -11,8 +11,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         get_races()
 
+r_not_main = re.compile("#|threads|License")
+
 def only_main(href):
-    return href and not re.compile("#").search(href)
+    return href and not r_not_main.search(href)
 
 race_list_urls = [
     'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces.html',
@@ -23,9 +25,11 @@ race_list_urls = [
 def get_races():
     for list_url in race_list_urls:
         page = BS(requests.get(list_url).text, 'html.parser')
-        for r in page.find('div',class_='body').find_all('a',href=only_main)[:-2]:
+        for r in page.find('div',class_='body').find_all('a',href=only_main):
             new_race = Race()
-            race_page = BS(requests.get('http://paizo.com'+r.get('href')).text,
+            new_race.prd_url = 'http://paizo.com'+r.get('href')
+
+            race_page = BS(requests.get(new_race.prd_url).text,
                 'html.parser')
             traits = race_page.find('div',class_='body').contents
             for trait in list(traits):
