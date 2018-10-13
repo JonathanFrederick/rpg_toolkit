@@ -17,16 +17,16 @@ def only_main(href):
     return href and not r_not_main.search(href)
 
 race_list_urls = [
-    'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces.html',
-    'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/featuredRaces.html',
-    'http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/uncommonRaces.html'
+    'http://legacy.aonprd.com/advancedRaceGuide/coreRaces.html',
+    'http://legacy.aonprd.com/advancedRaceGuide/featuredRaces.html',
+    'http://legacy.aonprd.com/advancedRaceGuide/uncommonRaces.html'
     ]
 
 def get_races():
     for list_url in race_list_urls:
         page = BS(requests.get(list_url).text, 'html.parser')
         for r in page.find('div',class_='body').find_all('a',href=only_main):
-            prd_url = 'http://paizo.com'+r.get('href')
+            prd_url = 'http://legacy.aonprd.com/advancedRaceGuide/'+r.get('href')
             try:
                 curr_race = Race.objects.get(prd_url=prd_url)
             except Race.DoesNotExist:
